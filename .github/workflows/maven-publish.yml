@@ -29,10 +29,11 @@ jobs:
 
     - name: Build with Maven
       run: |
-        cd lib && bash install.sh && \
-        mvn -B package --file pom.xml
+        cd lib && bash install.sh && cd .. && \
+        mvn -B clean install -Denv=release && 
+        tar czvf target.tgz target/
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: otter-package
+        path: target.tgz
