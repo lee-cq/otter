@@ -31,9 +31,8 @@ jobs:
       run: |
         cd lib && bash install.sh && cd .. && \
         mvn -B clean install -Denv=release && 
-        tar czvf target.tgz target/
 
     - uses: actions/upload-artifact@v2
       with:
         name: otter-package
-        path: target.tgz
+        path: target/*
