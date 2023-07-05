@@ -127,7 +127,7 @@ public class DdlUtils {
                 print0(ucase ? "TABLE " : "table ");
             }
 
-            if (x.isIfNotExiists()) {
+            if (x.isIfNotExists()) {
                 print0(ucase ? "IF NOT EXISTS " : "if not exists ");
             }
 
@@ -155,8 +155,10 @@ public class DdlUtils {
                 print(')');
             }
 
-            for (Map.Entry<String, SQLObject> option : x.getTableOptions().entrySet()) {
-                String key = option.getKey();
+            // for (Map.Entry<String, SQLObject> option : x.getTableOptions().entrySet()) {
+            //     String key = option.getKey();
+            for (SQLAssignItem option : x.getTableOptions()) {
+                String key = ((SQLIdentifierExpr) option.getTarget()).getName();
 
                 print(' ');
                 print0(ucase ? key : key.toLowerCase());
