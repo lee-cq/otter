@@ -155,9 +155,7 @@ public class DdlUtils {
                 print(')');
             }
 
-            // for (Map.Entry<String, SQLObject> option : x.getTableOptions().entrySet()) {
-            //     String key = option.getKey();
-            for (SQLAssignItem option : x.getTableOptions()) {
+             for (SQLAssignItem option : x.getTableOptions()) {
                 String key = ((SQLIdentifierExpr) option.getTarget()).getName();
 
                 print(' ');
@@ -238,8 +236,8 @@ public class DdlUtils {
             decrementIndent();
 
             int i = 0;
-            for (Map.Entry<String, SQLObject> option : x.getTableOptions().entrySet()) {
-                String key = option.getKey();
+            for (SQLAssignItem option : x.getTableOptions()) {
+                String key = ((SQLIdentifierExpr) option.getTarget()).getName();
                 if (i != 0) {
                     print(' ');
                 }
